@@ -19,6 +19,7 @@ func main() {
 	err = client.Ping(context.TODO(), nil)
 	if err != nil {
 		log.Fatal(err)
-	}
-	fmt.Println("Connected to MongoDB!") // output connection successful message
+	} else {
+		fmt.Println("Connected to MongoDB!") // output connection successful message
+	}	
 }
