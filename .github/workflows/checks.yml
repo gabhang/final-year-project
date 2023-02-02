@@ -14,6 +14,9 @@ jobs:
     # The type of runner that the job will run on
     name: Build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./BACKEND
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -27,5 +30,4 @@ jobs:
           go-version: 1.19
       # Run tests
       - name: Test
-        working-directory: ./app
         run: go test -v
