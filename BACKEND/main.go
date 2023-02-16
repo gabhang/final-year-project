@@ -6,35 +6,31 @@ import (
 	"log"
 
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+
+	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 var (
-	GradesCollection  *mongo.Collection
-	Ctx = context.TODO()
+	GradesCollection *mongo.Collection
+	Ctx              = context.TODO()
 )
 
 func main() {
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017") // Connect to //MongoDB
-	client, err := mongo.Connect(context.TODO(), clientOptions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Check the connection
-	err = client.Ping(context.TODO(), nil)
-	if err != nil {
-		log.Fatal(err)
-	} else {
-		fmt.Println("Connected to MongoDB!") // output connection successful message
-	}
-	
-	db := client.Database("students")
-	GradesCollection = db.Collection("grades")
+	route := mux.NewRouter()
+	s := route.PathPrefix("/api").Subrouter() //Base Path
+	//Routes
+	s.HandleFunc("/createProfile", createGrade).Methods("POST")
+	s.HandleFunc("/getAllUsers", getGrade).Methods("GET")
+	s.HandleFunc("/updateProfile", updateGrade).Methods("PUT")
+	s.HandleFunc("/deleteProfile/{id}", deleteGrade).Methods("DELETE")
+	log.Fatal(http.ListenAndServe(":8000", s)) // Run Server
 }
 
 type Grade struct {
-	Name string	`bson:"name"`
-	Mark int `bson:"mark"`
+	Name string `bson:"name"`
+	Mark int    `bson:"mark"`
 }
 
 func CreateGrade(g Grade) (string, error) {
