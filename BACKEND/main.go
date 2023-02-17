@@ -21,10 +21,10 @@ func main() {
 	route := mux.NewRouter()
 	s := route.PathPrefix("/api").Subrouter() //Base Path
 	//Routes
-	s.HandleFunc("/createProfile", createGrade).Methods("POST")
-	s.HandleFunc("/getAllUsers", getGrade).Methods("GET")
-	s.HandleFunc("/updateProfile", updateGrade).Methods("PUT")
-	s.HandleFunc("/deleteProfile/{id}", deleteGrade).Methods("DELETE")
+	s.HandleFunc("/createGrade", createGrade).Methods("POST")
+	s.HandleFunc("/getAllGrades", getGrade).Methods("GET")
+	s.HandleFunc("/updateGrade", updateGrade).Methods("PUT")
+	s.HandleFunc("/deleteGrade/{id}", deleteGrade).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8000", s)) // Run Server
 }
 
