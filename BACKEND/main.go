@@ -13,5 +13,6 @@ func main() {
 	s := route.PathPrefix("/api").Subrouter() //Base Path
 	//Routes
 	s.HandleFunc("/createGrade", createGrade).Methods("POST")
+	s.HandleFunc("/getGrades", getGrades).Methods("GET")
 	log.Fatal(http.ListenAndServe(":8000", s)) // Run Server
 }
