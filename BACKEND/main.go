@@ -14,5 +14,6 @@ func main() {
 	//Routes
 	s.HandleFunc("/createGrade", createGrade).Methods("POST")
 	s.HandleFunc("/getGrades", getGrades).Methods("GET")
+	s.HandleFunc("/updateGrade", updateGrade).Methods("PUT")
 	log.Fatal(http.ListenAndServe(":8000", s)) // Run Server
 }
