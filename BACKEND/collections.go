@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -105,4 +106,26 @@ func updateGrade(w http.ResponseWriter, r *http.Request) {
 	// encode the result value as a JSON object and write it to the HTTP response,
 	// allowing the client that made the request to consume the data in a format it understands
 	json.NewEncoder(w).Encode(result)
+}
+
+func deleteGrade(w http.ResponseWriter, r *http.Request) {
+
+	// add Content-type
+	w.Header().Set("Content-Type", "application/json")
+
+	// Vars to extract parameters in hexadecimal string
+	params := mux.Vars(r)["id"]
+
+	// convert into a MongoDB ObjectID
+	_id, err := primitive.ObjectIDFromHex(params) // convert params to mongodb Hex ID
+	if err != nil {
+		fmt.Printf(err.Error())
+	}
+	// Collation to specify more advanced string comparison
+	opts := options.Delete().SetCollation(&options.Collation{}) // to specify language-specific rules for string comparison, such as rules for lettercase
+	res, err := gradeCollection.DeleteOne(context.TODO(), bson.D{{"_id", _id}}, opts)
+	if err != nil {
+		log.Fatal(err)
+	}
+	json.NewEncoder(w).Encode(res.DeletedCount)
 }

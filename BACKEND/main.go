@@ -15,5 +15,6 @@ func main() {
 	s.HandleFunc("/createGrade", createGrade).Methods("POST")
 	s.HandleFunc("/getGrades", getGrades).Methods("GET")
 	s.HandleFunc("/updateGrade", updateGrade).Methods("PUT")
+	s.HandleFunc("/deleteGrade/{id}", deleteGrade).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8000", s)) // Run Server
 }
