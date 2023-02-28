@@ -25,7 +25,7 @@ func TestCRUDOperations(t *testing.T) {
 	testCreateGrade(t, client)
 	testGetGrades(t, client)
 	testUpdateGrade(t, client)
-	// testDeleteGrade(t, client)
+	testDeleteGrade(t, client)
 }
 
 func testCreateGrade(t *testing.T, client *mongo.Client) {
@@ -53,7 +53,7 @@ func testGetGrades(t *testing.T, client *mongo.Client) {
 
 	// Test data
 	studentGrades := []interface{}{
-        bson.M{"name": "Jane", "mark": 45},
+		bson.M{"name": "Jane", "mark": 45},
         bson.M{"name": "Joe", "mark": 10},
 	}
 
@@ -87,7 +87,7 @@ func testGetGrades(t *testing.T, client *mongo.Client) {
 	// Verify that all documents are returned
     expected := []bson.M{
         bson.M{"name": "John", "mark": 99},
-        bson.M{"name": "Jane", "mark": 45},
+		bson.M{"name": "Jane", "mark": 45},
         bson.M{"name": "Joe", "mark": 10},
     }
 
@@ -117,5 +117,23 @@ func testUpdateGrade(t *testing.T, client *mongo.Client) {
 	}
 	if student.Mark != 20 {
 		t.Fatal("Failed to update student grade")
+	}
+}
+
+func testDeleteGrade(t *testing.T, client *mongo.Client) {
+	
+	// Access grade collection
+	gradeCollection := client.Database("students").Collection("grades")
+
+	// Delete student grades by names
+	filter := bson.D{{"name", "John"}, {"name", "Jane"}, {"name", "Joe"}}
+	result, err := gradeCollection.DeleteMany(context.Background(), filter)
+	if err != nil {
+		t.Fatal(err)
+	}
+	
+	// Check if the student grades were deleted
+	if result.DeletedCount == 0 {
+		t.Fatal("Failed to delete user")
 	}
 }
