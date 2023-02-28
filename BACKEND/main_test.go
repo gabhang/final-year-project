@@ -126,7 +126,7 @@ func testDeleteGrade(t *testing.T, client *mongo.Client) {
 	gradeCollection := client.Database("students").Collection("grades")
 
 	// Delete student grades by names
-	filter := bson.D{{"name", "John"}, {"name", "Jane"}, {"name", "Joe"}}
+	filter := bson.M{"name": bson.M{"$in": []string{"John", "Jane", "Joe"}}}
 	result, err := gradeCollection.DeleteMany(context.Background(), filter)
 	if err != nil {
 		t.Fatal(err)
