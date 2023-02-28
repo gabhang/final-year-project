@@ -24,7 +24,7 @@ func TestCRUDOperations(t *testing.T) {
 	// Call test functions for CRUD operations
 	testCreateGrade(t, client)
 	testGetGrades(t, client)
-	// testUpdateGrade(t, client)
+	testUpdateGrade(t, client)
 	// testDeleteGrade(t, client)
 }
 
@@ -51,12 +51,13 @@ func testGetGrades(t *testing.T, client *mongo.Client) {
 	// Access grade collection
 	gradeCollection := client.Database("students").Collection("grades")
 
+	// Test data
 	studentGrades := []interface{}{
         bson.M{"name": "Jane", "mark": 45},
         bson.M{"name": "Joe", "mark": 10},
 	}
 
-	// Insert some test data
+	// Insert test data
     _, err := gradeCollection.InsertMany(context.Background(), studentGrades)
     if err != nil {
         t.Fatal(err)
@@ -91,4 +92,30 @@ func testGetGrades(t *testing.T, client *mongo.Client) {
     }
 
     assert.Equal(t, len(expected), len(results))
+}
+
+func testUpdateGrade(t *testing.T, client *mongo.Client) {
+
+	// Access grade collection
+	gradeCollection := client.Database("students").Collection("grades")
+
+	// Find user by name
+	filter := bson.D{{"name", "Joe"}}
+
+	// Update student grade
+	update := bson.D{{"$set", bson.D{{"mark", 20}}}}
+	_, err := gradeCollection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		t.Fatal(err)
+	}
+	
+	// Check if the student grade was updated successfully
+	var student Student
+	err = gradeCollection.FindOne(context.Background(), filter).Decode(&student)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if student.Mark != 20 {
+		t.Fatal("Failed to update student grade")
+	}
 }
