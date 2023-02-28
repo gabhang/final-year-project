@@ -10,7 +10,7 @@ import (
 func TestCRUDOperations(t *testing.T) {
 
 	// Initialize MongoDB connection
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017"))
+	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://gabhang:gabrielfyp@cluster0.g0aphtm.mongodb.net/?retryWrites=true&w=majority"))
 	if err != nil {
 		t.Fatal(err)
 	}

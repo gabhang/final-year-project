@@ -18,15 +18,14 @@ func db() *mongo.Client {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(client)
-	fmt.Println(err)
+
 	// Check the connection
 	err = client.Ping(context.TODO(), nil)
 
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(err)
+
 	fmt.Println("Connected to MongoDB!")
 	return client
 }
