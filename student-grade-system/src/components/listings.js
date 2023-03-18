@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export class Listings extends React.Component {
 
@@ -30,7 +31,7 @@ export class Listings extends React.Component {
             <div>
                 <h1>Data from MongoDB</h1>
                 {this.state.studentGrades.length > 0 ?
-                    <table>
+                    <table className='listings'>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -44,7 +45,7 @@ export class Listings extends React.Component {
                                 <tr key={studentGrades._id}>
                                     <td>{studentGrades.name}</td>
                                     <td>{studentGrades.mark}</td>
-                                    <td><button>Edit</button></td>
+                                    <td><Link to={"/edit/" + studentGrades._id} className="btn btn-primary">Edit</Link></td>
                                     <td><button>Delete</button></td>
                                 </tr>
                             ))}

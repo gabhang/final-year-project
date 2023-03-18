@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.listings {
+  border-collapse: collapse; /* collapse the border of the table cells */
+  width: 100%;
+}
+
+.listings th,
+.listings td {
+  border: 1px solid black; /* add a border to the table cells */
+  padding: 8px; /* add some padding to space out the columns */
+  text-align: left;
+}
+
+.listings th {
+  background-color: #ddd; /* add a background color to the table header */
+  font-weight: bold;
+}
