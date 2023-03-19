@@ -7,14 +7,26 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type Student struct {
-	Name string `bson:"name"`
-	Mark int `bson:"mark"`
+	ID            primitive.ObjectID `bson:"_id"`
+	StudentNumber string             `bson:"studentNumber"`
+	Name          string             `bson:"name"`
+	Grade         json.Number        `bson:"grade"`
+	Year          json.Number        `bson:"year"`
+	Class         json.Number        `bson:"class"`
+}
+
+type UpdateStudent struct {
+	StudentNumber string             `bson:"studentNumber"`
+	Name          string             `bson:"name"`
+	Grade         json.Number        `bson:"grade"`
+	Year          json.Number        `bson:"year"`
+	Class         json.Number        `bson:"class"`
 }
 
 // access database collection and returns *mongo.Client
@@ -27,7 +39,7 @@ func createGrade(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	var student Student
-	err := json.NewDecoder(r.Body).Decode(&student) // get data from request body 
+	err := json.NewDecoder(r.Body).Decode(&student) // get data from request body
 	if err != nil {
 		fmt.Print(err)
 	}
@@ -38,20 +50,20 @@ func createGrade(w http.ResponseWriter, r *http.Request) {
 
 	// print/return output/result/error
 	fmt.Println("Created grade: ", insertResult)
-	json.NewEncoder(w).Encode(insertResult.InsertedID) 
+	json.NewEncoder(w).Encode(insertResult.InsertedID)
 
 }
 
 func getGrades(w http.ResponseWriter, r *http.Request) {
-	
+
 	// add Content-type
 	w.Header().Set("Content-Type", "application/json")
-	
+
 	// primitive package for BSON data
 	var results []primitive.M // .M = map
 
 	// returns a *mongo.Cursor that acts as a pointer to find/get documents/results from the database collection
-	cur, err := gradeCollection.Find(context.TODO(), bson.D{{}}) 
+	cur, err := gradeCollection.Find(context.TODO(), bson.D{{}})
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -65,7 +77,7 @@ func getGrades(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// appending each document/result to results array
-		results = append(results, elem) 
+		results = append(results, elem)
 	}
 
 	// close cursors to avoid resource leaks and ensure efficient use of resources
@@ -73,38 +85,68 @@ func getGrades(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(results)
 }
 
+func getGradeByID(w http.ResponseWriter, r *http.Request) {
+
+	// Get ID from URL params
+	params := mux.Vars(r)
+	id := params["id"]
+
+	// Parse ObjectID from the ID string
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		// Handle error
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprintf(w, "Invalid student ID: %v", err)
+		return
+	}
+
+	// Find student with specified ID
+	var student Student
+
+	err = gradeCollection.FindOne(context.Background(), bson.M{"_id": objID}).Decode(&student)
+	if err != nil {
+		// Handle error
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+
+	// Return student data as JSON
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(student)
+}
+
 func updateGrade(w http.ResponseWriter, r *http.Request) {
 
-	// add Content-type
-	w.Header().Set("Content-Type", "application/json")
+	// Get ID from URL params
+	params := mux.Vars(r)
+	id := params["id"]
 
-	type updateBody struct {
-		Name string `bson:"name"` // match name
-		Mark int `bson:"mark"` // modify mark
+	// Decode JSON request body into updateStudent struct
+	var updateStudent UpdateStudent
+	_ = json.NewDecoder(r.Body).Decode(&updateStudent)
+
+	// Parse ObjectID from the ID string
+	objID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		// Handle error
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprintf(w, "Invalid student ID: %v", err)
+		return
 	}
-	var body updateBody
-	e := json.NewDecoder(r.Body).Decode(&body)
-	if e != nil {
-		fmt.Print(e)
+
+	// Update student with matching ID in the database
+	filter := bson.M{"_id": objID}
+	update := bson.M{"$set": updateStudent}
+	result, err := gradeCollection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		log.Fatal(err)
 	}
-	// D: document
-	filter := bson.D{{"name", body.Name}} // converting name to BSON
-	
-	after := options.After
-	returnOpt := options.FindOneAndUpdateOptions{
-		ReturnDocument: &after,
-	}
-	update := bson.D{{"$set", bson.D{{"mark", body.Mark}}}}
-	updateResult := gradeCollection.FindOneAndUpdate(context.TODO(), filter, update, &returnOpt)
+	fmt.Printf("Updated %v documents\n", result.ModifiedCount)
 
-	var result primitive.M // map
-
-	// use _ as blank identifier as Decode only returns error if it fails
-	_ = updateResult.Decode(&result)
-
+	// Send updated student back in response.
 	// encode the result value as a JSON object and write it to the HTTP response,
 	// allowing the client that made the request to consume the data in a format it understands
-	json.NewEncoder(w).Encode(result)
+	json.NewEncoder(w).Encode(updateStudent)
 }
 
 func deleteGrade(w http.ResponseWriter, r *http.Request) {

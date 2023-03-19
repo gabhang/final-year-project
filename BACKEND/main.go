@@ -17,7 +17,8 @@ func main() {
 	// Routes
 	s.HandleFunc("/createGrade", createGrade).Methods("POST")
 	s.HandleFunc("/getGrades", getGrades).Methods("GET")
-	s.HandleFunc("/updateGrade", updateGrade).Methods("PUT")
+	s.HandleFunc("/getGrade/{id}", getGradeByID).Methods("GET")
+	s.HandleFunc("/updateGrade/{id}", updateGrade).Methods("PUT")
 	s.HandleFunc("/deleteGrade", deleteGrade).Methods("DELETE")
 	
 	// Setup CORS
