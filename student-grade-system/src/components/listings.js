@@ -30,12 +30,15 @@ export class Listings extends React.Component {
         return (
             <div>
                 <h1>Data from MongoDB</h1>
-                {this.state.studentGrades.length > 0 ?
+                {this.state.studentGrades != null ?
                     <table className='listings'>
                         <thead>
                             <tr>
+                                <th>Student Number</th>
                                 <th>Name</th>
                                 <th>Grade</th>
+                                <th>Year</th>
+                                <th>Class</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -43,15 +46,18 @@ export class Listings extends React.Component {
                         <tbody>
                             {this.state.studentGrades.map(studentGrades => (
                                 <tr key={studentGrades._id}>
+                                    <td>{studentGrades.studentNumber}</td>
                                     <td>{studentGrades.name}</td>
-                                    <td>{studentGrades.mark}</td>
-                                    <td><Link to={"/edit/" + studentGrades._id} className="btn btn-primary">Edit</Link></td>
+                                    <td>{studentGrades.grade}</td>
+                                    <td>{studentGrades.year}</td>
+                                    <td>{studentGrades.class}</td>
+                                    <td><Link to={"/update/" + studentGrades._id} className="btn btn-primary">Edit</Link></td>
                                     <td><button>Delete</button></td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                : <p>Loading data...</p>
+                : <p>No data...</p>
                 }
             </div>
         );
