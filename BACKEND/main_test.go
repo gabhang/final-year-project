@@ -3,8 +3,7 @@ package main
 import (
 	"testing"
 	"context"
-	"encoding/json"
-	
+
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/bson"
@@ -36,7 +35,7 @@ func testCreateGrade(t *testing.T, client *mongo.Client) {
 	gradeCollection := client.Database("students").Collection("grades")
 
 	// Create new student grade
-	student := Student{Name: "John", Grade: json.Number("99")}
+	student := Student{Name: "John", Grade: "99"}
 	result, err := gradeCollection.InsertOne(context.Background(), student)
 	if err != nil {
 		t.Fatal(err)
@@ -55,8 +54,8 @@ func testGetGrades(t *testing.T, client *mongo.Client) {
 
 	// Test data
 	studentGrades := []interface{}{
-		bson.M{"name": "Jane", "grade": 45},
-        bson.M{"name": "Joe", "grade": 10},
+		bson.M{"name": "Jane", "grade": "45"},
+        bson.M{"name": "Joe", "grade": "10"},
 	}
 
 	// Insert test data
@@ -88,9 +87,9 @@ func testGetGrades(t *testing.T, client *mongo.Client) {
 
 	// Verify that all documents are returned
     expected := []bson.M{
-        bson.M{"name": "John", "grade": 99},
-		bson.M{"name": "Jane", "grade": 45},
-        bson.M{"name": "Joe", "grade": 10},
+        bson.M{"name": "John", "grade": "99"},
+		bson.M{"name": "Jane", "grade": "45"},
+        bson.M{"name": "Joe", "grade": "10"},
     }
 
     assert.Equal(t, len(expected), len(results))
@@ -105,7 +104,7 @@ func testUpdateGrade(t *testing.T, client *mongo.Client) {
 	filter := bson.D{{"name", "Joe"}}
 
 	// Update student grade
-	update := bson.D{{"$set", bson.D{{"grade", 20}}}}
+	update := bson.D{{"$set", bson.D{{"grade", "20"}}}}
 	_, err := gradeCollection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
 		t.Fatal(err)
@@ -117,7 +116,7 @@ func testUpdateGrade(t *testing.T, client *mongo.Client) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if student.Grade != json.Number("20") {
+	if student.Grade != "20" {
 		t.Fatal("Failed to update student grade")
 	}
 }

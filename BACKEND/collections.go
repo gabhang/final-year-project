@@ -13,20 +13,20 @@ import (
 )
 
 type Student struct {
+	StudentNumber string             `bson:"studentNumber"`
+	Name          string             `bson:"name"`
+	Grade         string        `bson:"grade"`
+	Year          string        `bson:"year"`
+	Class         string        `bson:"class"`
+}
+
+type GetStudent struct {
 	ID            primitive.ObjectID `bson:"_id"`
 	StudentNumber string             `bson:"studentNumber"`
 	Name          string             `bson:"name"`
-	Grade         json.Number        `bson:"grade"`
-	Year          json.Number        `bson:"year"`
-	Class         json.Number        `bson:"class"`
-}
-
-type UpdateStudent struct {
-	StudentNumber string             `bson:"studentNumber"`
-	Name          string             `bson:"name"`
-	Grade         json.Number        `bson:"grade"`
-	Year          json.Number        `bson:"year"`
-	Class         json.Number        `bson:"class"`
+	Grade         string        `bson:"grade"`
+	Year          string        `bson:"year"`
+	Class         string        `bson:"class"`
 }
 
 // access database collection and returns *mongo.Client
@@ -101,7 +101,7 @@ func getGradeByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Find student with specified ID
-	var student Student
+	var student GetStudent
 
 	err = gradeCollection.FindOne(context.Background(), bson.M{"_id": objID}).Decode(&student)
 	if err != nil {
@@ -122,7 +122,7 @@ func updateGrade(w http.ResponseWriter, r *http.Request) {
 	id := params["id"]
 
 	// Decode JSON request body into updateStudent struct
-	var updateStudent UpdateStudent
+	var updateStudent Student
 	_ = json.NewDecoder(r.Body).Decode(&updateStudent)
 
 	// Parse ObjectID from the ID string
