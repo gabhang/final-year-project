@@ -5,7 +5,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Listings } from './components/listings'
 import { CreateSG } from './components/createSG'
-import { UpdateSG } from './components/createSG'
+import { UpdateSG } from './components/updateSG'
 
 function App() {
   return (

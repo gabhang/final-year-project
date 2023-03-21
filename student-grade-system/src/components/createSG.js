@@ -17,8 +17,8 @@ export class CreateSG extends React.Component {
             studentNumber: '',
             name: '',
             grade: '',
-            year: '',
-            class: ''
+            year: '1',
+            class: '1'
         }
     }
 
