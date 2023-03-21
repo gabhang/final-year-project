@@ -5,6 +5,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Listings } from './components/listings'
 import { CreateSG } from './components/createSG'
+import { UpdateSG } from './components/createSG'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path='/' element={< Listings />} exact />
             <Route path='/create' element={< CreateSG />} />
+            <Route path='/update/:id' element={< UpdateSG />} />
           </Routes>
         </div>
       </Router>
