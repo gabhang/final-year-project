@@ -151,19 +151,31 @@ func updateGrade(w http.ResponseWriter, r *http.Request) {
 
 func deleteGrade(w http.ResponseWriter, r *http.Request) {
 
-	// add Content-type
-	w.Header().Set("Content-Type", "application/json")
+	// Get ID from URL params
+	params := mux.Vars(r)
+	id := params["id"]
 
-	var student Student
-	err := json.NewDecoder(r.Body).Decode(&student)
-	if err != nil {
-		fmt.Print(err)
-	}
+    // extract the student ID from the parameters
+    objID, err := primitive.ObjectIDFromHex(id)
+    if err != nil {
+        http.Error(w, "Invalid student ID", http.StatusBadRequest)
+        return
+    }
 
-	filter := bson.M{"name": student.Name}
-	res, err := gradeCollection.DeleteOne(context.TODO(), filter)
-	if err != nil {
-		log.Fatal(err)
-	}
-	json.NewEncoder(w).Encode(res.DeletedCount)
+    // delete the student with the given ID
+    result, err := gradeCollection.DeleteOne(context.TODO(), bson.M{"_id": objID})
+    if err != nil {
+        http.Error(w, "Failed to delete student", http.StatusInternalServerError)
+        return
+    }
+
+    // check if a document was deleted
+    if result.DeletedCount == 0 {
+        http.Error(w, "Student not found", http.StatusNotFound)
+        return
+    }
+
+    // return a success message
+    w.WriteHeader(http.StatusOK)
+    fmt.Fprintf(w, "Student deleted successfully")
 }

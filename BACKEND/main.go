@@ -19,7 +19,7 @@ func main() {
 	s.HandleFunc("/getGrades", getGrades).Methods("GET")
 	s.HandleFunc("/getGrade/{id}", getGradeByID).Methods("GET")
 	s.HandleFunc("/updateGrade/{id}", updateGrade).Methods("PUT")
-	s.HandleFunc("/deleteGrade", deleteGrade).Methods("DELETE")
+	s.HandleFunc("/deleteGrade/{id}", deleteGrade).Methods("DELETE")
 	
 	// Setup CORS
 	c := cors.New(cors.Options{
