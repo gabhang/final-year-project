@@ -34,21 +34,22 @@ export class Listings extends React.Component {
 
     // filter data using initial response state and set filteredStudentGrades with filteredData
     filterData = (e) => {
+        var filteredData
         // if selectedIndex from dropdownmenu is between 2 to 4 (inclusive), filter by class in year 1
         if (e.target.selectedIndex >= 2 && e.target.selectedIndex <= 4) {
-            var filteredData = this.state.studentGrades.filter((student) => {
+            filteredData = this.state.studentGrades.filter((student) => {
                 return student.year === "1" && student.class === e.target.value
             })
         }
         // else if selectedIndex from dropdownmenu is between 6 to 8 (inclusive), filter by class in year 2
         else if (e.target.selectedIndex >= 6 && e.target.selectedIndex <= 8) {
-            var filteredData = this.state.studentGrades.filter((student) => {
+            filteredData = this.state.studentGrades.filter((student) => {
                 return student.year === "2" && student.class === e.target.value
             })
         }
         // else if selectedIndex from dropdownmenu is between 10 to 12 (inclusive), filter by class in year 3
         else if (e.target.selectedIndex >= 10 && e.target.selectedIndex <= 12) {
-            var filteredData = this.state.studentGrades.filter((student) => {
+            filteredData = this.state.studentGrades.filter((student) => {
                 return student.year === "3" && student.class === e.target.value
             })
         }
@@ -88,7 +89,7 @@ export class Listings extends React.Component {
                             <option value="2">Class 2</option>
                             <option value="3">Class 3</option>
                     </select>
-                        {this.state.filteredStudentGrades.length != 0 ?
+                        {this.state.filteredStudentGrades.length !== 0 ?
                             <table className='listings'>
                                 <thead>
                                     <tr>
