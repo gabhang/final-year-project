@@ -10,7 +10,7 @@ export class Listings extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/getGrades')
+        axios.get('http://localhost:4000/getGrades')
             .then((response) => { // If successful - Set state to response
                 this.setState({ studentGrades: response.data, filteredStudentGrades: response.data}) // update state
             }) 
@@ -22,7 +22,7 @@ export class Listings extends React.Component {
     handleDelete(id) {
         const confirmDelete = window.confirm("Are you sure you want to delete this student?");
         if (confirmDelete) {
-            axios.delete('http://localhost:8000/api/deleteGrade/' + id)
+            axios.delete('http://localhost:4000/deleteGrade/' + id)
             .then((res) => {
                 window.location.reload(); // Refresh the page to reflect the updated data
             })

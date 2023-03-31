@@ -37,9 +37,8 @@ export class CreateSG extends React.Component {
         }
 
         // Sending post request to the server
-        axios.post('http://localhost:8000/api/createGrade', newSG) // send newUser object to server
+        axios.post('http://localhost:4000/createGrade', newSG) // send newUser object to server
             .then((res) => {
-                console.log(newSG)
                 // back to listings
                 window.location = '/'
             })
@@ -51,7 +50,7 @@ export class CreateSG extends React.Component {
         this.setState({           
             studentNumber: '',
             name: '',
-            grade: '',
+            grade: 0,
             year: '',
             class: ''
         })
