@@ -34,7 +34,7 @@ app.use('/static', express.static(path.join(__dirname, 'build//static')))
 const mongoose = require('mongoose')
 
 // Set up connection string for database  
-const mongoConnection = 'mongodb+srv://gabhang:gabrielfyp@cluster0.g0aphtm.mongodb.net/?retryWrites=true&w=majority'
+const mongoConnection = 'mongodb+srv://gabhang:gabrielfyp@cluster0.g0aphtm.mongodb.net/students?retryWrites=true&w=majority'
 mongoose.connect(mongoConnection, { useNewUrlParser: true })
 
 // schema for database
@@ -90,6 +90,8 @@ app.delete('/deleteGrade/:id', async (req, res) => {
 })
 
 // Server app listening on port (4000)
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log('Listening at http://localhost:' + port)
-})
+  })
+  
+module.exports = server

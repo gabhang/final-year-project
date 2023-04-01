@@ -15,6 +15,11 @@ afterEach(async () => {
   await mongoose.connection.close();
 });
 
+/* Close server after done listening/running all tests */
+afterAll(async () => {
+  await app.close()
+})
+
 // Define a test suite to test CRUD functionalities of student grades
 describe('CRUD Functionality', () => {
   // Initialize testId variable to store document ID during creation
