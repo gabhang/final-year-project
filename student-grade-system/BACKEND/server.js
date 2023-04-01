@@ -33,7 +33,7 @@ app.use('/static', express.static(path.join(__dirname, 'build//static')))
 // Including Mongoosejs package
 const mongoose = require('mongoose')
 
-// Set up connection string for database
+// Set up connection string for database  
 const mongoConnection = 'mongodb+srv://gabhang:gabrielfyp@cluster0.g0aphtm.mongodb.net/?retryWrites=true&w=majority'
 mongoose.connect(mongoConnection, { useNewUrlParser: true })
 
@@ -78,7 +78,7 @@ app.get('/getGrade/:id', async (req, res) => {
 // update SG with specific id
 app.put('/updateGrade/:id', async (req, res) => {
     // find product with that id and update from database
-    const data = await StudentGradeModel.findByIdAndUpdate(req.params.id, req.body)
+    const data = await StudentGradeModel.findByIdAndUpdate(req.params.id, req.body, { new: true }) // return updated
     res.status(200).send(data);
 })
 
