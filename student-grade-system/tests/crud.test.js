@@ -7,7 +7,7 @@ require("dotenv").config();
 
 /* Connecting to the database before each test. */
 beforeEach(async () => {
-  await mongoose.connect("mongodb+srv://gabhang:gabrielfyp@cluster0.g0aphtm.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true });
+  await mongoose.connect("mongodb+srv://gabhang:gabrielfyp@cluster0.g0aphtm.mongodb.net/students?retryWrites=true&w=majority", { useNewUrlParser: true });
 });
 
 /* Closing database connection after each test. */
