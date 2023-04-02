@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 // Changed port from 3000 to 4000 so that its not running on the same port as the app
-const port = 4000
+const port = process.env.PORT || 4000
 
 // Including body parser (Middleware)
 const bodyParser = require('body-parser')
@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
 
 // Configuration for sending build and static files for deployment
 const path = require('path')
-app.use(express.static(path.join(__dirname, '../build')))
+app.use(express.static(path.join(__dirname, '../BACKEND/build')))
 app.use('/static', express.static(path.join(__dirname, 'build//static')))
 
 // Including Mongoosejs package
