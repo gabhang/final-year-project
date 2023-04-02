@@ -2,6 +2,9 @@
   "name": "student-grade-system",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18.15.0"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -25,7 +28,7 @@
     "build": "react-scripts build",
     "test": "cross-env NODE_ENV=test jest --testTimeout=5000",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTIO=false && npm install --prefix student-grade-system && npm run build --prefix student-grade-system"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTIO=false && npm install && npm run build"
   },
   "eslintConfig": {
     "extends": [
