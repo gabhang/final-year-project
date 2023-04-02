@@ -14,9 +14,6 @@ jobs:
     # The type of runner that the job will run on
     name: Build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./student-grade-system
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -32,6 +29,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Run test
+      # Run test (CI)
       - name: Run test
         run: npm test
+
+      # Deploy (CD)
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: "student-grade-system"
+          heroku_email: "g00377198@atu.ie"
