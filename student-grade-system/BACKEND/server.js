@@ -27,8 +27,8 @@ app.use(function (req, res, next) {
 
 // Configuration for sending build and static files for deployment
 const path = require('path')
-app.use(express.static(path.join(__dirname, '../BACKEND/build')))
-app.use('/static', express.static(path.join(__dirname, 'build//static')))
+app.use(express.static(path.join(__dirname, '../build')))
+app.use('/static', express.static(path.join(__dirname, '../build//static')))
 
 // Including Mongoosejs package
 const mongoose = require('mongoose')
