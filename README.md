@@ -3,7 +3,7 @@ This repository serves as my final year project at Atlantic Technology Universit
 
 The student grade system deployed from this repository can be accessed [here](https://student-grade-system.herokuapp.com/). The website is built using **React.js** as the front-end and **MongoDB** as the database. Initially, the backend server was developed in **Go** language, but it was later changed to **Node.js** and **Express.js** due to deployment compatibility and issues. Next, **Jest** and **Supertest** were used to write tests for testing, and **Heroku** was used for deployment. Lastly, **Jira**, a project management software, is utilised to plan and track project progress as shown below with a roadmap.
 
-![Screenshot of the roadmap in Jira](%PUBLIC_URL%/jira.png)
+![Screenshot of the roadmap in Jira](./public/jira.png)
 
 ## Objectives
 - To demonstrate an understanding of principles and practices of continuous integration and deployment for better efficiency.
