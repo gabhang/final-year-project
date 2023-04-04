@@ -39,7 +39,8 @@
 
 .listings {
   border-collapse: collapse; /* collapse the border of the table cells */
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .listings th,
@@ -52,4 +53,88 @@
 .listings th {
   background-color: #ddd; /* add a background color to the table header */
   font-weight: bold;
+}
+
+.sortHeader {
+  /* Make headers that have sorting feature more obvious for users */
+  text-decoration: underline;
+  cursor: pointer; 
+}
+
+.sortHeader:hover {
+  background-color: #ddd;
+}
+
+/* Center the form */
+.Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Add some padding and border to the form */
+form {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+}
+
+/* Style the form title */
+h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Style the form inputs */
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.form-control {
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0 15px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: none;
+}
+
+select.form-control {
+  height: 50px;
+}
+
+/* Style the form button */
+.btn-lg {
+  font-size: 22px;
+  margin-top: 20px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-dark {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.btn-dark:hover {
+  background-color: #23272b;
+}
+
+/* Style filter */
+.filter {
+  margin-bottom: 20px;
 }
