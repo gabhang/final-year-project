@@ -5,14 +5,18 @@ import { Link } from 'react-router-dom';
 export class Listings extends React.Component {
 
     state = {
-        studentGrades: [],
-        filteredStudentGrades: [],
+        studentGrades: [], // initial state from database
+        filteredStudentGrades: [], // after filtering
+        currentSortedColumn: ''
     }
 
     componentDidMount() {
         axios.get('http://localhost:4000/getGrades')
             .then((response) => { // If successful - Set state to response
-                this.setState({ studentGrades: response.data, filteredStudentGrades: response.data}) // update state
+                this.setState({
+                    studentGrades: response.data,
+                    filteredStudentGrades: response.data
+                }); // update state
             }) 
             .catch((error) => { // If error
                 console.log(error);
@@ -34,7 +38,7 @@ export class Listings extends React.Component {
 
     // filter data using initial response state and set filteredStudentGrades with filteredData
     filterData = (e) => {
-        var filteredData
+        let filteredData
         // if selectedIndex from dropdownmenu is between 2 to 4 (inclusive), filter by class in year 1
         if (e.target.selectedIndex >= 2 && e.target.selectedIndex <= 4) {
             filteredData = this.state.studentGrades.filter((student) => {
@@ -63,18 +67,38 @@ export class Listings extends React.Component {
             ...this.state,
             filteredStudentGrades: filteredData
         })
+    }
 
-        console.log(filteredData)
+    // sort data using filteredStudentGrades state
+    handleSort = (column) => {
+        // check if the clicked column is the current sort column or not
+        const newSortColumn = column === this.state.currentSortedColumn ? null : column;
+    
+        // create a copy of the filtered data to sort
+        let sortedData = [...this.state.filteredStudentGrades];
+        // sort data by the clicked column if it's a new sort column
+        if (newSortColumn) {
+            sortedData.sort((a, b) => {
+              return a[newSortColumn] < b[newSortColumn] ? -1 : a[newSortColumn] > b[newSortColumn] ? 1 : 0;
+            });
+        }
+        
+    
+        // update the state with the sorted data and new sort column
+        this.setState({
+            filteredStudentGrades: sortedData,
+            currentSortedColumn: newSortColumn
+        });
     }
 
     render() {
         return (
             <div>
-                <h1>Data from MongoDB</h1>
+                <h1>Student Grade Listings</h1>
                 {this.state.studentGrades != null ?
                     // React.Fragment to group elements into 1 to avoid jsx error
                     <React.Fragment>
-                        <select onChange={this.filterData}>
+                        <select className='filter' onChange={this.filterData}>
                             <option value="All">Filter By Class</option>
                             <option disabled>────── Year 1 ──────</option>
                             <option value="1">Class 1</option>
@@ -93,13 +117,13 @@ export class Listings extends React.Component {
                             <table className='listings'>
                                 <thead>
                                     <tr>
-                                        <th>Student Number</th>
-                                        <th>Name</th>
-                                        <th>Grade</th>
-                                        <th>Year</th>
-                                        <th>Class</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                    <th className='sortHeader' onClick={() => this.handleSort('studentNumber')}>Student Number</th>
+                                    <th className='sortHeader' onClick={() => this.handleSort('name')}>Name</th>
+                                    <th className='sortHeader' onClick={() => this.handleSort('grade')}>Grade</th>
+                                    <th>Year</th>
+                                    <th>Class</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
