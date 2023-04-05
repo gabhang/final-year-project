@@ -1,0 +1,129 @@
+\chapter{Methodology}
+
+The focus of this project is to design and implement a continuous integration and continuous delivery (CI/CD) pipeline. The pipeline would automate the building, testing, and deployment of the application to a production environment. In addition, a MERN (MongoDB, Express, React, Node.js) website is designed to integrate and test the pipeline automatically. The decision to carry out a CI/CD pipeline project was made due to the increasing popularity of automation in software development.
+
+The project started with Agile development methodologies and transitioned to DevOps methodologies after completing the design and implementation of the CI/CD pipeline. Initially, the developer decided to switch the web application's backend from Node.js and Express.js to GO to make the project more challenging and the learn a new programming language. Basically, the idea was to build a pipeline and a website while pick up a new language.
+
+Throughout the coding process, secondary resources were used frequently to learn GO and set up the workflow. After the website was fully designed and the features were fully implemented, the developer started designing the CI/CD pipeline. The CI part went smoothly as expected, but the CD part encountered some difficulties. The section on system evaluation will provide explanations and evidence. After attempting several solutions, the developer decided to switch back to the initial MERN stack as the focus was on designing the CI/CD pipeline.
+
+This section will be divided into two parts: software development approaches and tools and technologies used in this project.
+
+\section{Software Development Approaches}
+
+The developer used Agile development methodologies initially for designing the website and the pipeline, and then transitioned to DevOps after completing the design and implementation of the CI/CD pipeline. However, it is important to note that DevOps is not limited to only CI/CD but is a combination of development and operations practices that emphasize automation and monitoring throughout the software development lifecycle.
+
+By combining Agile development with DevOps practices, the developer aimed to create an efficient, reliable, and scalable software development process \cite{hlrf}. Agile provided flexibility and adaptation to changing requirements during the design and development phases, while DevOps ensured automation, testing, and monitoring during deployment and production phases. The integration of these two methodologies aimed to create a seamless and streamlined software development process from conception to production.
+
+\subsection{Agile Development}
+Moving away from traditional software development methodologies that are incapable of adapting to changes, the developer chose to use the agile method for the development phase as the project involves incremental changes and iterations and does not have fixed features as they may change due to factors such as time constraints. Furthermore, Agile methods strive for a faster release schedule, making them ideal for projects that require quick adaptability to changes \cite{aaa, hlrf, dragos, koch}. Table~\ref{tab:swmethod} below shows how agile was chosen over traditional methodologies like waterfall, for instance.
+
+\begin{table}[ht]
+    \centering
+\begin{tabular}{|p{5cm}||p{3.5cm}||p{3.5cm}|}
+\hline
+\textbf{Parameter} & \textbf{Traditional} & \textbf{Agile} \\
+\hline \hline
+Ease of Modification  & Difficult & Easy \\
+\hline
+Development Approach  & Predictable  & Adaptive \\
+\hline
+Development Orientation  & Process-focused & Customer-focused \\
+\hline
+Team Size & Medium & Small \\
+\hline
+Budget & High & Low \\
+\hline
+\end{tabular}
+\linebreak
+    \caption{Comparison of Software Development Methodologies: Traditional and Agile \cite{aaa}}
+    \label{tab:swmethod}
+\end{table}
+
+\subsubsection{Scrum}
+The Scrum framework from Agile was adopted for this project. Scrum is an iterative and incremental framework for managing product development that emphasizes teamwork, accountability, and adaptability \cite{aaa, koch}. The Scrum framework consists of several roles, including the Product Owner, Scrum Master, and Development Team. Figure~\ref{image:scrum} in Appendix~\ref{appendix:scrum} contains a visual representation of the Scrum process.
+
+Despite being a one-man team, the developer included the product backlog, utilized sprint planning to break down user stories into manageable tasks and run sprints using Jira. Examples of the product backlog, sprint planning and sprint execution can be found in Appendix~\ref{appendix:jira}.
+
+\subsection{DevOps Implementation}
+After completing the design and implementation of the project's CI/CD pipeline, the developer began the transition to the "DevOps era". DevOps is a fundamental aspect of Agile that incorporates operations and it is all about "continuous" \cite{vsd, mitesh}. Figure~\ref{image:devops} shows a simple illustration of DevOps in Appendix~\ref{appendix:devops} \cite{os}. DevOps can be considered an improved version of Agile that emerged to address the bottleneck that prevented development teams from delivering to operations more quickly and frequently \cite{hlrf}.
+
+The DevOps approach aims for faster deployment of software and quicker response to changes. This is possible because a well-designed pipeline can deploy changes in a matter of minutes as opposed to several days for manual deployment \cite{joakim, khdwf}. DevOps was used to continuously monitor, maintain, and improve the CI/CD pipeline. It assists in aligning and automating the process across development, testing, deployment, and support phases, and includes best practices such as code repositories, build automation, continuous deployment, and others \cite{spj}. 
+
+\subsubsection{What is CI/CD? \cite{sander, nikhil}}
+
+\begin{itemize}
+\item Continuous Integration (CI): A practice that involves merging code changes from a development team into a shared repository on a regular basis, followed by an automated process of building and testing the application to identify any integration issues.
+\item Continuous Deployment (CD): The process of automating the release of software changes to production (aka deployment).
+\end{itemize}
+
+In this project, GitHub Actions is used as the tool to set up the pipeline using workflow file. When the developer makes changes to the project, mainly the coding part, and pushes it up to GitHub, the workflow begins to build, test, and deploy the application automatically. For the testing part of the workflow, the developer wrote a test program and added it to the workflow while Heroku is used for deployment. Further information regarding these tools and technologies will be discussed in the following section.
+
+\section{Tools and Technologies}
+\subsection{Version Control System}
+\subsubsection{Git}
+The use of a version control system is an important aspect of this project's methodology. For managing the application's source code, Git is used as the primary version control system. GitHub is used as a remote repository to store the project's source code, allowing the developer to manage changes and to track changes over time thanks to Git's ability to push code as checkpoints called commits.
+
+\subsection{CI/CD implementation}
+\subsubsection{GitHub Actions}
+To ensure that changes to the application were automatically built, tested, and deployed to the production environment, GitHub Actions is used to set up the pipeline. GitHub Actions is a popular CI/CD platform that provides developers with the ability to automate their software development workflows. It offers several features such as building, testing, and deploying code from within GitHub. Th developer has to design and implement a workflow for automation.
+
+\subsubsection{Supertest and Jest}
+Supertest and Jest are popular testing frameworks used for CI. Supertest is a Node.js library used to test HTTP requests, while Jest is a testing framework for JavaScript projects that provides a complete testing solution with a focus on simplicity.
+
+\subsubsection{Heroku}
+Heroku is a popular cloud-based platform used for CD. It allows developers to deploy, manage, and scale their applications quickly and easily. Heroku provides a wide range of features, including support for multiple programming languages, integration with third-party services, and a powerful API.
+
+\subsection{Database}
+\subsubsection{MongoDB}
+A database is needed to store simple information of students. MongoDB is an open source, non-relational database management system that processes and stores data in the form of flexible documents rather than tables and rows. MongoDB does not require a relational database management system, so it provides an elastic data storage model that allows users to easily store and query the database. This simplifies database management for developers and provides a highly scalable environment, which is why MongoDB is chosen to be the database of this project.
+
+For this project, there is a collection in the database called \textit{grades} with the following structure:
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{3.5cm}||p{3cm}||p{5.5cm}|}
+    \hline
+    \textbf{Field} & \textbf{Datatype} & \textbf{Special Conditions} \\
+    \hline \hline
+    \textunderscore id  & ObjectId & Auto-generated by database \\
+    \hline
+    studentNumber  & String & Required \\
+    \hline
+    name & String & Required \\
+    \hline
+    grade & String & Required \\
+    \hline
+    year & String & Required \\
+    \hline
+    class & String & Required \\
+    \hline
+    \end{tabular}
+    \linebreak
+        \caption{MongoDB Structure}
+        \label{tab:mongodbstruc}
+\end{table}
+
+\subsection{Backend Server API and Frontend Development}
+The initial plan was to develop a MERN stack application with CRUD functionalities to support the pipeline. However, for additional knowledge, the developer decided to use GO language for the backend server as mentioned previously. GO language was chosen due to its portability, efficiency, and sufficient library resources, which will be further discussed in the technical review section \cite{mihalis, andrew, cgptt}. However, due to deployment issues, the developer had to switch back to the MERN stack to ensure a smooth implementation of the pipeline.
+
+The MERN stack is a full JavaScript stack and a lightweight web development framework that is used in this project due to its high efficiency, loose coupling, and high cohesion. Appendix~\ref{appendix:mern} states what each component of MERN stands for individually. \cite{eddy, shama}.
+
+The CRUD functionalities that are implemented in the student grade system for this project are as follows:
+
+\begin{itemize}
+\item Create: Add a student with grades and other information.
+\item Read: Get all students' information and filter certain categories of students.
+\item Update: Update student grades and/or information.
+\item Delete: Delete a student.
+\end{itemize}
+
+\subsection{Project Management}
+\subsubsection{Jira}
+
+Project management plays an important role in ensuring the success of software development projects. In this project, Jira was used as the project management tool. Jira provides a powerful set of features that allow the developer to plan, track, and manage their work effectively. The following steps were taken in the project management process:
+
+\begin{enumerate}
+  \item Planning: Tasks were created and organised in the backlog, which were then prioritised and moved into sprints for development accordingly. Figure~\ref{image:backlog} in Appendix~\ref{appendix:jira} shows an example of the backlog with tasks/issues grouped into sprints.
+  \item Task management: Tasks were  categorised into different epics, which represent a larger features or milestones in the project. The project roadmap, which can be seen in figure~\ref{image:roadmap} in Appendix~\ref{appendix:jira}, illustrates the different epics and their progress.
+  \item Progress tracking: The progress of the project can be tracked using the roadmap in general or by using Jira's board feature, which allows the developer to view and change the state of tasks (to do/in progress/done) in real-time. Figure~\ref{image:board} in Appendix~\ref{appendix:jira} provides an example of the board feature. 
+\end{enumerate}
