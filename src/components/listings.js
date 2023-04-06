@@ -81,8 +81,7 @@ export class Listings extends React.Component {
             sortedData.sort((a, b) => {
               return a[newSortColumn] < b[newSortColumn] ? -1 : a[newSortColumn] > b[newSortColumn] ? 1 : 0;
             });
-        }
-        
+        }       
     
         // update the state with the sorted data and new sort column
         this.setState({

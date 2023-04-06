@@ -100,7 +100,7 @@ export class UpdateSG extends React.Component {
                 <Container>
                     {/* create edit student info form */}
                     <form onSubmit={this.handleUpdate}>
-                        <h3>Edit Student Grade!</h3>
+                        <h3>Edit Student</h3>
 
                         {/* Student Number */}
                         <div className="form-group">

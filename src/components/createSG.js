@@ -97,7 +97,7 @@ export class CreateSG extends React.Component {
                 <Container>
                     {/* create create SG form */}
                     <form onSubmit={this.handleCreate}>
-                        <h3>Add Student!</h3>
+                        <h3>Add Student</h3>
 
                         {/* input student number */}
                         <div className="form-group">
