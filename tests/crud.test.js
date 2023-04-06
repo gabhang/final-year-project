@@ -1,21 +1,19 @@
 const mongoose = require("mongoose");
 const request = require("supertest");
-
 const app = require("../BACKEND/server");
-
 require("dotenv").config();
 
-/* Connecting to the database before each test. */
+// Connecting to the database before each test
 beforeEach(async () => {
   await mongoose.connect("mongodb+srv://gabhang:gabrielfyp@cluster0.g0aphtm.mongodb.net/students?retryWrites=true&w=majority", { useNewUrlParser: true });
 });
 
-/* Closing database connection after each test. */
+// Closing database connection after each test
 afterEach(async () => {
   await mongoose.connection.close();
 });
 
-/* Close server after done listening/running all tests */
+// Close server after done listening/running all tests
 afterAll(async () => {
   await app.close()
 })

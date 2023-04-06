@@ -39,8 +39,7 @@ mongoose.connect(mongoConnection, { useNewUrlParser: true })
 
 // schema for database
 const Schema = mongoose.Schema;
-
-var studentGradeSchema = new Schema({
+let studentGradeSchema = new Schema({
     studentNumber: String,
     name: String,
     grade: Number,
@@ -49,7 +48,7 @@ var studentGradeSchema = new Schema({
 });
 
 // create model for database for interaction
-var StudentGradeModel = mongoose.model("grades", studentGradeSchema)
+let StudentGradeModel = mongoose.model("grades", studentGradeSchema)
 
 // post request to create new SG
 app.post('/createGrade', async (req, res) => {
@@ -94,4 +93,4 @@ const server = app.listen(port, () => {
     console.log('Listening at http://localhost:' + port)
   })
   
-module.exports = server
+module.exports = server // export server to close after running tests
