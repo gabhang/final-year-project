@@ -11,6 +11,46 @@ The student grade system deployed from this repository can be accessed [here](ht
 - To implement best practices for software development, such as testing and documentation.
 - To develop skills in project management, including project planning and tracking.
 
+## Directory Layout with Main Files Listed
+This is the directory layout for the project, with the main files listed. The tree structure helps visualize the hierarchy of directories and files, while the main files listed provide an overview of the project's contents.
+
+```bash
+├── .github/workflows
+│   └── checks.yml
+├── BACKEND
+│   └── server.js
+├── dissertation
+├── public
+├── src
+│   ├── components
+│   │   ├── createSG.js
+│   │   ├── listings.js
+│   │   ├── updateSG.js
+│   ├── App.css
+│   └── App.js
+├── tests
+│   ├── crud.test.js
+├── .gitignore
+├── Procfile
+├── README.md
+├── package-lock.json
+└── package.json
+```
+
+The main files listed are as follows:
+
+- `.github/workflows/checks.yml`: This file sets up GitHub Actions to run checks on each push request to ensure that the code passes all tests and deploys automatically to Heroku..
+- `BACKEND/server.js`: This file contains the backend code for the project, which handles CRUD API requests and database interactions.
+- `dissertation`: This directory contains the author's dissertation in LaTeX format.
+- `public`: This directory contains public files, such as images and static HTML files.
+- `src`: This directory contains the main React source code for the project, including the *components* subdirectory that contains different pages of the website. The `App.js` file provides a navigation bar for every page, while the `App.css` file manages the CSS styles for the website.
+- `tests/crud.test.js`: This file contains tests for the project, testing the Create, Read, Update, and Delete (CRUD) functionality.
+- `.gitignore`: This file specifies files and directories to be ignored by Git when committing changes. For this project, the `node_modules` and `build` folders are ignored, for instance."
+- `Procfile`: This file is used by Heroku to specify the commands to run when the app is deployed. In this project, this file is used to start the server.
+- `README.md`: This file provides an overview of the project.
+- `package-lock.json`: This file specifies version numbers for dependencies to ensure consistency across installations.
+- `package.json`: This file specifies the project's dependencies and scripts for running the app.
+
 ## Tools and Technologies
 - **React.js** for front-end development.
 - **Node.js** and **Express.js _(initially GO)_** for the server-side scripting.
