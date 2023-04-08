@@ -1,3 +1,59 @@
 \chapter{Introduction}
 
-This chapter should provide a clear context for your project and set out its objectives. You can cite references from the bibliography using IEEE format, such as Claude Shannon \cite{shannon1948mathematical} and John Von Neumann \textit{et al} \cite{von2007theory}. Use Google Scholar's BibTex export function to get a \LaTeX formatted citation to copy and paste into the \textit{references.bib} document.
+\section{Background Information}
+
+\section{Problem Statement}
+
+\section{Significance of the Study}
+
+
+\section{Objectives}
+\begin{enumerate}
+  \item To demonstrate an understanding of principles and practices of continuous integration and deployment for better efficiency.
+  \item To enhance designing and developing a scalable web application using modern front-end frameworks and back-end technologies.
+  \item To implement best practices for software development, such as testing and documentation.
+  \item To develop skills in project management, including project planning and tracking.
+\end{enumerate}
+
+\section{Project Repository Overview and Key Components}
+A functioning student grade management website that incorporates basic CRUD functionalities and demonstrates continuous integration and deployment principles and practices has been designed. The code for this project is hosted on GitHub, and can be found \href{https://github.com/gabhang/final-year-project}{here}. The website is built using React.js as the front-end and MongoDB as the database. Initially, the back-end server was developed in Go language, but it was later changed to Node.js and Express.js due to deployment compatibility and issues. Next, Jest and Supertest were used to write tests for testing, and Heroku was used for deployment. Lastly, Jira, a project management software, is utilised to plan and track project progress.
+
+The student grade system deployed from this repository can be accessed \href{https://student-grade-system.herokuapp.com/}{here} and the following directory layout shows the hierarchy of directories and files for the project with description:
+\newline
+\dirtree{%
+.1 student-grade-system.
+.2 .github/workflows.
+.3 checks.yml.
+.2 BACKEND.
+.3 server.js.
+.2 dissertation.
+.2 public.
+.2 src.
+.3 components.
+.4 create.SG.js.
+.4 listings.js.
+.4 updateSG.js.
+.3 App.js.
+.3 App.css.
+.2 test.
+.3 crud.test.js.
+.2 .gitignore.
+.2 Procfile.
+.2 README.md.
+.2 package-lock.json.
+.2 package.json.
+}
+
+\begin{itemize}
+\item .github/workflows/checks.yml: This file sets up GitHub Actions to run checks on each push request to ensure that the code passes all tests and deploys automatically to Heroku.
+\item BACKEND/server.js: This file contains the back-end code for the project, which handles CRUD API requests and database interactions.
+\item dissertation: This directory contains the author's dissertation in LaTeX format.
+\item public: This directory contains public files, such as images and static HTML files.
+\item src: This directory contains the main React source code for the project, including the components sub-directory that contains different pages of the website. The App.js file provides a navigation bar for every page, while the App.css file manages the CSS styles for the website.
+\item tests/crud.test.js: This file contains tests for the project, testing the Create, Read, Update, and Delete (CRUD) functionality.
+\item .gitignore: This file specifies files and directories to be ignored by Git when committing changes. For this project, the node\_modules and build folders are ignored, for instance.
+\item Procfile: This file is used by Heroku to specify the commands to run when the app is deployed. In this project, this file is used to start the server.
+\item README.md: This file provides an overview of the project.
+\item package-lock.json: This file specifies version numbers for dependencies to ensure consistency across installations.
+\item package.json: This file specifies the project's dependencies and scripts for running the app.
+\end{itemize}
