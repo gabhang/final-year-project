@@ -7,3 +7,39 @@ The project started with Agile development methodologies and transitioned to Dev
 Throughout the coding process, secondary resources were used frequently to learn GO and set up the workflow. After the website was fully designed and the features were fully implemented, the developer started designing the CI/CD pipeline. The CI part went smoothly as expected, but the CD part encountered some difficulties. The section on system evaluation will provide explanations and evidence. After attempting several solutions, the developer decided to switch back to the initial MERN stack as the focus was on designing the CI/CD pipeline.
 
 This section will be divided into two parts: software development approaches and tools and technologies used in this project.
+
+\section{Software Development Approaches}
+
+The developer used Agile development methodologies initially for designing the website and the pipeline, and then transitioned to DevOps after completing the design and implementation of the CI/CD pipeline. However, it is important to note that DevOps is not limited to only CI/CD but is a combination of development and operations practices that emphasize automation and monitoring throughout the software development lifecycle.
+
+By combining Agile development with DevOps practices, the developer aimed to create an efficient, reliable, and scalable software development process \cite{hlrf}. Agile provided flexibility and adaptation to changing requirements during the design and development phases, while DevOps ensured automation, testing, and monitoring during deployment and production phases. The integration of these two methodologies aimed to create a seamless and streamlined software development process from conception to production.
+
+\subsection{Agile Development}
+Moving away from traditional software development methodologies that are incapable of adapting to changes, the developer chose to use the agile method for the development phase as the project involves incremental changes and iterations and does not have fixed features as they may change due to factors such as time constraints. Furthermore, Agile methods strive for a faster release schedule, making them ideal for projects that require quick adaptability to changes \cite{aaa, hlrf, dragos, koch}. Table~\ref{tab:swmethod} below shows how agile was chosen over traditional methodologies like waterfall, for instance.
+
+\begin{table}[ht]
+    \centering
+\begin{tabular}{|p{5cm}||p{3.5cm}||p{3.5cm}|}
+\hline
+\textbf{Parameter} & \textbf{Traditional} & \textbf{Agile} \\
+\hline \hline
+Ease of Modification  & Difficult & Easy \\
+\hline
+Development Approach  & Predictable  & Adaptive \\
+\hline
+Development Orientation  & Process-focused & Customer-focused \\
+\hline
+Team Size & Medium & Small \\
+\hline
+Budget & High & Low \\
+\hline
+\end{tabular}
+\linebreak
+    \caption{Comparison of Software Development Methodologies: Traditional and Agile \cite{aaa}}
+    \label{tab:swmethod}
+\end{table}
+
+\subsubsection{Scrum}
+The Scrum framework from Agile was adopted for this project. Scrum is an iterative and incremental framework for managing product development that emphasizes teamwork, accountability, and adaptability \cite{aaa, koch}. The Scrum framework consists of several roles, including the Product Owner, Scrum Master, and Development Team. Figure~\ref{image:scrum} in appendix~\ref{appendix:scrum} contains a visual representation of the Scrum process.
+
+Despite being a one-man team, the developer included the product backlog, utilized sprint planning to break down user stories into manageable tasks and run sprints using Jira. Examples of the product backlog, sprint planning and sprint execution can be found in Appendix~\ref{appendix:jira}.
