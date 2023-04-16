@@ -40,6 +40,20 @@ Budget & High & Low \\
 \end{table}
 
 \subsubsection{Scrum}
-The Scrum framework from Agile was adopted for this project. Scrum is an iterative and incremental framework for managing product development that emphasizes teamwork, accountability, and adaptability \cite{aaa, koch}. The Scrum framework consists of several roles, including the Product Owner, Scrum Master, and Development Team. Figure~\ref{image:scrum} in appendix~\ref{appendix:scrum} contains a visual representation of the Scrum process.
+The Scrum framework from Agile was adopted for this project. Scrum is an iterative and incremental framework for managing product development that emphasizes teamwork, accountability, and adaptability \cite{aaa, koch}. The Scrum framework consists of several roles, including the Product Owner, Scrum Master, and Development Team. Figure~\ref{image:scrum} in Appendix~\ref{appendix:scrum} contains a visual representation of the Scrum process.
 
 Despite being a one-man team, the developer included the product backlog, utilized sprint planning to break down user stories into manageable tasks and run sprints using Jira. Examples of the product backlog, sprint planning and sprint execution can be found in Appendix~\ref{appendix:jira}.
+
+\subsection{DevOps Implementation}
+After completing the design and implementation of the project's CI/CD pipeline, the developer began the transition to the "DevOps era". DevOps is a fundamental aspect of Agile that incorporates operations and it is all about "continuous" \cite{vsd, mitesh}. Figure~\ref{image:devops} shows a simple illustration of DevOps in Appendix~\ref{appendix:devops} \cite{os}. DevOps can be considered an improved version of Agile that emerged to address the bottleneck that prevented development teams from delivering to operations more quickly and frequently \cite{hlrf}.
+
+The DevOps approach aims for faster deployment of software and quicker response to changes. This is possible because a well-designed pipeline can deploy changes in a matter of minutes as opposed to several days for manual deployment \cite{joakim, khdwf}. DevOps was used to continuously monitor, maintain, and improve the CI/CD pipeline. It assists in aligning and automating the process across development, testing, deployment, and support phases, and includes best practices such as code repositories, build automation, continuous deployment, and others \cite{spj}. 
+
+\subsubsection{What is CI/CD? \cite{sander, nikhil}}
+
+\begin{itemize}
+\item Continuous Integration (CI): A practice that involves merging code changes from a development team into a shared repository on a regular basis, followed by an automated process of building and testing the application to identify any integration issues.
+\item Continuous Deployment (CD): The process of automating the release of software changes to production (aka deployment).
+\end{itemize}
+
+In this project, GitHub Actions is used as the tool to set up the pipeline using workflow file. When the developer makes changes to the project, mainly the coding part, and pushes it up to GitHub, the workflow begins to build, test, and deploy the application automatically. For the testing part of the workflow, the developer wrote a test program and added it to the workflow while Heroku is used for deployment. Further infomation regarding these tools and technologies will be discussed in the following section.
