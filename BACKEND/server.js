@@ -40,11 +40,11 @@ mongoose.connect(mongoConnection, { useNewUrlParser: true })
 // schema for database
 const Schema = mongoose.Schema;
 let studentGradeSchema = new Schema({
-    studentNumber: String,
-    name: String,
-    grade: Number,
-    year: String,
-    class: String
+    studentNumber: { type: String, required: true },
+    name: { type: String, required: true },
+    grade: { type: Number, required: true },
+    year: { type: String, required: true },
+    class: { type: String, required: true }
 });
 
 // create model for database for interaction
