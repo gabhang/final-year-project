@@ -28,7 +28,7 @@
     "build": "react-scripts build",
     "test": "cross-env NODE_ENV=test jest --testTimeout=5000",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTIO=false && npm install && npm run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install && npm run build"
   },
   "eslintConfig": {
     "extends": [
