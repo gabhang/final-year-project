@@ -1,1 +1,34 @@
 \chapter{System Evaluation}
+
+This section assesses and identifies potential areas for improvement and effectiveness in meeting the objectives. It also addresses any problems or difficulties that may have impacted or affected the project throughout the whole process.
+
+\section{Project Management-Jira}
+The project lasted for a total of five months with 15 sprints conducted. Due to some scopes being infeasible or undersized, they had to be adjusted. Also, a few sprints did not complete on time as planned as shown in the sprint burndown chart in Figure~\ref{image:sprint-burndown} from Appendix~\ref{appendix:jira}. All sprints were initiated and completed within a month or less, fulfilling the qualification criteria that typically takes one to two weeks, but not more than one month.
+
+\section{GitHub Commits}
+At the beginning, there were fewer commits as more research was carried out. Once the research process was completed, the number of commits gradually increased as shown in Figure~\ref{image:commits} below.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/commits.png}
+    \caption{GitHub Commits}
+    \label{image:commits}
+\end{figure}
+
+\section{GitHub Actions Workflow}
+A large research work had been done to understand the design of workflow, unsuccessful initial attempts to build the workflows, as shown in Figure~\ref{image:workflow-failed} in Appendix~\ref{appendix:CICD}. Errors that the developer encountered included indentation and missing job names in the workflow file, as well as the correct path to start a process (refer Figure~\ref{image:build-fail-directory.png}). 
+
+When the initial application was designed with Go language as the server was completed and worked when run locally, compatible issues arose. At first, Heroku was not able to detect the language of the application as GO and Javascript were used and it can only auto-detect one language. When the developer specified the language by adding Node.js and GO buildpacks, the server side still did not set up as one with the client to deploy as a single application due to compatibility issues. Deployment was constantly being rejected by Heroku as shown in Figure~\ref{image:heroku-go-issue.png} in Appendix~\ref{appendix:CICD}. The developer was still unable to deploy the frontend and backend due to the lack of online resources and information as this approach had not been taken by many developers. The developer also tried different deployment approaches using AWS and Docker. However, when the student grade system is finally deployed using Docker and Heroku, only the client side worked. 
+
+Due to time pressure, the developer decided to redesign and redevelop the backend with Node.js and express.js instead of GO. The MERN stack was deployed successfully using the PROCFILE to start up the server and used the Heroku post-build feature to start up the client side as discussed in the system design section. The app is successfully deployed as shown in Figure~\ref{image:heroku-success.png} in Appendix~\ref{appendix:CICD} and can be accessed \href{https://student-grade-system.herokuapp.com/}{here} 
+
+\section{Database}
+Initially, the MongoDB URI for the database was set to \textit{localhost:27017/} which was the port number of MongoDB, but it was later changed to a more specific address that accesses that collection. The other problem is that the URI is exposed in the file, hence, it is not secure enough. Furthermore, the developer realised that the data was not written into the correct collection in the database during the development process. Hence, the developer changed the URI with the correct collection name by specifying the collection name it which is \textit{students}. Here is the final MongoDB URI: 
+
+\textit{mongodb+srv://gabhang:gabrielfyp@cluster0.g0aphtm.mongodb.net/students?\newline retryWrites=true\&w=majority}. 
+
+\section{GO Language}
+The developer spent a significant amount of time researching GO language with its documentation and simple syntax. GO was difficult and different from the languages the developer had previously learned and it was not as easy as stated on the internet. Despite this, the developer was able to develop a functional application in GO. Unfortunately, due to deployment issues, the developer was unable to demonstrate the final product with GO and was forced to switch to the MERN stack. Despite this setback, the developer found it beneficial to learn GO and develop an application that can run on it.
+
+\section{Testing}
+The testing part for the project was written in GO at the beginning, but was later switched to JavaScript due to changes in the backend to Node.js and Express.js. For testing, Supertest and Jest were utilized as they were found to be very straightforward and easy to understand. Though Mocha and Chai were considered, ultimately they were not used. While Jest is mainly for testing out React, it was still deemed suitable for the project. But, the testing focused only on the backend of the project. During the testing process, an issue was encountered as Jest detected one open handle that could potentially keep Jest from exiting. Upon further investigation, it was discovered that the port was not closed as stated by the console. To resolve this, the code was updated to include a code snippet to close up the application or port after testing, enable Jest to finish execution.
