@@ -26,7 +26,7 @@ steps:
   - name: Checkout
     uses: actions/checkout@v3
 ```
-3. These steps set up the environment by installing Node.js and the required dependencies.
+4. These steps set up the environment by installing Node.js and the required dependencies.
 ```bash
   - name: Setup Node.js
     uses: actions/setup-node@v2
@@ -35,12 +35,12 @@ steps:
   - name: Install dependencies
     run: npm install
 ```
-4. This step runs the test suite for the website.
+5. This step runs the test suite for the website.
 ```bash
 - name: Run test
     run: npm test
 ```
-5. This step deploys the website to Heroku. The heroku_api_key is stored in secrets, and the heroku_app_name is set as "student-grade-system". The heroku_email is the email address of the account the deploye the project.
+6. This step deploys the website to Heroku. The heroku_api_key is stored in secrets, and the heroku_app_name is set as "student-grade-system". The heroku_email is the email address of the account that deploys the project.
 ```bash
   - name: Deploy to Heroku
     uses: akhileshns/heroku-deploy@v3.12.12
