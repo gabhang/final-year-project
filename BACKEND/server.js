@@ -51,7 +51,7 @@ let studentGradeSchema = new Schema({
 let StudentGradeModel = mongoose.model("grades", studentGradeSchema)
 
 // post request to create new SG
-app.post('/createGrade', async (req, res) => {
+app.post('/api/createGrade', async (req, res) => {
     const data = await StudentGradeModel.create({
         studentNumber: req.body.studentNumber,
         name: req.body.name,
@@ -63,26 +63,26 @@ app.post('/createGrade', async (req, res) => {
 })
 
 // get request from /getGrades and response with json
-app.get('/getGrades', async (req, res) => {
+app.get('/api/getGrades', async (req, res) => {
     const data = await StudentGradeModel.find()
     res.status(200).send(data);
 })
 
 // Listen for a get request and will return a SG which has the id specified after /update/:id
-app.get('/getGrade/:id', async (req, res) => {
+app.get('/api/getGrade/:id', async (req, res) => {
     const data = await StudentGradeModel.findOne({ _id: req.params.id })
     res.status(200).send(data);
 })
 
 // update SG with specific id
-app.put('/updateGrade/:id', async (req, res) => {
+app.put('/api/updateGrade/:id', async (req, res) => {
     // find product with that id and update from database
     const data = await StudentGradeModel.findByIdAndUpdate(req.params.id, req.body, { new: true }) // return updated
     res.status(200).send(data);
 })
 
 // delete SG with specific id
-app.delete('/deleteGrade/:id', async (req, res) => {
+app.delete('/api/deleteGrade/:id', async (req, res) => {
     // delete record with that specific id (id associated with delete button)
     const data = await StudentGradeModel.deleteOne({ _id: req.params.id })
     res.status(200).send(data);
@@ -90,7 +90,7 @@ app.delete('/deleteGrade/:id', async (req, res) => {
 
 // Server app listening on port (4000)
 const server = app.listen(port, () => {
-    console.log('Listening at http://localhost:' + port)
+    console.log('Listening at port:' + port)
   })
   
 module.exports = server // export server to close after running tests

@@ -27,7 +27,7 @@ describe('CRUD Functionality', () => {
   // Test Create function
   it('should create a new student', async () => {
     const response = await request(app)
-      .post('/createGrade')
+      .post('/api/createGrade')
       .send({
         // Test data
         studentNumber: 'T001',
@@ -43,14 +43,14 @@ describe('CRUD Functionality', () => {
 
   // Test Read all function
   it('should get all student', async () => {
-    const response = await request(app).get('/getGrades'); 
+    const response = await request(app).get('/api/getGrades'); 
     expect(response.statusCode).toEqual(200); // Expect no errors
     expect(response.body.length).toBeGreaterThan(0); // Expect body >0 (initial = 0)
   });
 
   // Test Read specific function
   it('should get a specific student', async () => {
-    const response = await request(app).get(`/getGrade/${testId}`);
+    const response = await request(app).get(`/api/getGrade/${testId}`);
     expect(response.statusCode).toEqual(200); // Expect no errors
     expect(response.body._id).toEqual(testId); // Expect response.testId = testId
   });
@@ -58,7 +58,7 @@ describe('CRUD Functionality', () => {
   // Test Update function
   it('should update a specific student', async () => {
     const response = await request(app)
-      .put(`/updateGrade/${testId}`)
+      .put(`/api/updateGrade/${testId}`)
       // Pass over update body
       .send({
         grade: 100
@@ -69,7 +69,7 @@ describe('CRUD Functionality', () => {
 
   // Test Delete function
   it('should delete a specific student', async () => {
-    const response = await request(app).delete(`/deleteGrade/${testId}`);
+    const response = await request(app).delete(`/api/deleteGrade/${testId}`);
     expect(response.statusCode).toEqual(200); // Expect no errors
     expect(response.body.deletedCount).toEqual(1); // Expect document to be deleted (=1)
   });

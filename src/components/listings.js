@@ -11,7 +11,7 @@ export class Listings extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/getGrades')
+        axios.get('/api/getGrades')
             .then((response) => { // If successful - Set state to response
                 this.setState({
                     studentGrades: response.data,
@@ -26,7 +26,7 @@ export class Listings extends React.Component {
     handleDelete(id) {
         const confirmDelete = window.confirm("Are you sure you want to delete this student?");
         if (confirmDelete) {
-            axios.delete('http://localhost:4000/deleteGrade/' + id)
+            axios.delete('/api/deleteGrade/' + id)
             .then((res) => {
                 window.location.reload(); // Refresh the page to reflect the updated data
             })
@@ -144,6 +144,7 @@ export class Listings extends React.Component {
                     </React.Fragment>
                 : <p>No data...</p>
                 }
+                <Link to={"/create"} className="btn btn-primary add">Add student</Link>
             </div>
         );
     }

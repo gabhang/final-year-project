@@ -37,7 +37,7 @@ export class CreateSG extends React.Component {
         }
 
         // Sending post request to the server
-        axios.post('http://localhost:4000/createGrade', newSG) // send newUser object to server
+        axios.post('/api/createGrade', newSG) // send newUser object to server
             .then((res) => {
                 // back to listings
                 window.location = '/'

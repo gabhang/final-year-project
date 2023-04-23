@@ -16,7 +16,6 @@ function App() {
             <Navbar.Brand href="/"><img src="atu-logo-green.png" width="100" alt='logo'></img></Navbar.Brand>
             <Nav className="ml-auto">
               <Nav.Link href="/">Listings</Nav.Link>
-              <Nav.Link href="/create">Add Student</Nav.Link>
             </Nav>
           </Navbar>
 

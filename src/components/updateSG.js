@@ -25,7 +25,7 @@ export class UpdateSG extends React.Component {
 
     componentDidMount() {
         // Axios request to retrieve data from database
-        axios.get('http://localhost:4000/getGrade/' + this.id)
+        axios.get('/api/getGrade/' + this.id)
             .then(response => {
                 this.setState({
                     _id: response.data._id,
@@ -56,7 +56,7 @@ export class UpdateSG extends React.Component {
         }
 
         // Sending put request to the server to update details
-        axios.put('http://localhost:4000/updateGrade/' + this.state._id, updateSG) // send updated object to server
+        axios.put('/api/updateGrade/' + this.state._id, updateSG) // send updated object to server
             .then((res) => { 
                 // back to listings
                 window.location='/'
