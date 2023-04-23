@@ -5,11 +5,26 @@ This section is based on the final product of the project. Any compatibility or 
 \section{CI/CD Design and Implementation}
 GitHub Actions is used as the CI/CD tool in this project. Workflow files (.yml or .yaml) that automate tests, deployment, etc. are assigned using GitHub Actions. It is possible to run the workflow automatically after certain GitHub events like commit push. A green tick or a red cross will be shown beside the commit in the repository to indicate if the workflow has been completed successfully.
 
-Workflow files can be designed manually or by using recommended workflows on GitHub such as Jekyll or readily made template like JupyterLite. In this project, the pipeline is designed manually. Refer to Figure~\ref{image:full-workflow} in Appendix~\ref{appendix:CICD} for the full workflow code or redirect to the GitHub repository page \href{https://github.com/gabhang/final-year-project}{here}.
+Workflow files can be designed manually or by using recommended workflows on GitHub such as Jekyll or readily made template like JupyterLite. In this project, the pipeline is designed manually.Redirect to the GitHub repository page \href{https://github.com/gabhang/final-year-project}{here}.
 
-The workflow is triggered whenever a commit is pushed to the main branch. The workflow has one job named "build" that will run on an Ubuntu operating system that has four steps. The first step checks out from the repository for automation. The second step sets up the Node.js environment with version 18. The third step installs the necessary dependencies for the project using \texttt{npm install}. The fourth step runs the tests to ensure that the website's features are working correctly. Finally, the last step in the workflow deploys the application to Heroku using the \textit{akhileshns/heroku-deploy} action with the Heroku API key the app name and the email of the account. The Heroku API key is stored in GitHub secrets and is accessed through the \$\{\{ secrets.HEROKU\textunderscore API\textunderscore KEY \}\} variable.
+Figure~\ref{image:full-workflow} shows the yml file of the workflow. The workflow is triggered whenever a commit is pushed to the main branch. The workflow has one job named "build" that will run on an Ubuntu operating system that has five steps. 
 
-Overall, this workflow ensures that the website's features work perfectly by building, testing, and deploying the application automatically in response to changes in the main branch.
+\begin{enumerate}
+  \item Checkout from the repository for automation.
+  \item Setup Node.js version 18.x.
+  \item Install dependencies using npm
+  \item Run tests using npm with designed test suite integrated in the project with \texttt{npm install} command.
+  \item Deploy the code to Heroku using the \textit{akhileshns/heroku-deploy} action with the Heroku API key the app name and the email of the account. The Heroku API key is stored in GitHub secrets and is accessed through the \$\{\{ secrets.HEROKU\textunderscore API\textunderscore KEY \}\} variable.
+\end{enumerate}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.5\textwidth]{images/full-workflow.png}
+    \caption{GitHub Actions Workflow}
+    \label{image:full-workflow}
+\end{figure}
+
+Overall, this workflow ensures that the website's features work perfectly by building, testing, and deploying the system automatically in response to changes in the main branch.
 
 The \texttt{npm test} in the workflow file runs the tests automatically from the directory. The test file was design using Supertest and Jest to test out CRUD API. The code snippet from Figure~\ref{image:test-create} below tests the functionality of a create functionality, specifically, the \texttt{createGrade} function that creates a new student record. It sends a HTTP POST request to the \textit{/createGrade} endpoint with test data and expects a response status code of 200 and a response message of 'Student Grade Added'. It stores the ID of the newly created student record in a variable called \texttt{testId} to test out other functionalities. This test case ensures that the createGrade function is able to create new student records without errors.
 
@@ -20,7 +35,14 @@ The \texttt{npm test} in the workflow file runs the tests automatically from the
     \label{image:test-create}
 \end{figure}
 
-After ensuring the application is working as expected by running the test suite, the workflow uses Heroku to deploy the application. It is vital to note that \textit{Procfile} is included in the directory as it specifies the commands that are executed by the application on startup, and the server will be started up in this context. The build file from the client side is duplicated to the server side as the server will be run first and after building the server, the Heroku post-build is used to run the build file to show the frontend. Figure~\ref{image:heroku-build} in Appendix~\ref{appendix:CICD} shows that \texttt{heroku-postbuild} is added under the script in package-json.
+After ensuring the application is working as expected by running the test suite, the workflow uses Heroku to deploy the application. It is vital to note that \textit{Procfile} is included in the directory as it specifies the commands that are executed by the application on startup, and the server will be started up in this context. The build file from the client side is duplicated to the server side as the server will be run first and after building the server, the Heroku post-build is used to run the build file to show the frontend. Figure~\ref{image:heroku-build} below shows that \texttt{heroku-postbuild} is added under the script in package-json.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/heroku-build.png}
+    \caption{Code Snippet from package.json to show heroku-postbuild}
+    \label{image:heroku-build}
+\end{figure}
 
 \section{MongoDB Database Design}
 
