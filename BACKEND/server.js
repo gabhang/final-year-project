@@ -51,7 +51,7 @@ let studentGradeSchema = new Schema({
 let StudentGradeModel = mongoose.model("grades", studentGradeSchema)
 
 // post request to create new SG
-app.post('/api/createGrade', async (req, res) => {
+app.post('/api/createGradesss', async (req, res) => {
     const data = await StudentGradeModel.create({
         studentNumber: req.body.studentNumber,
         name: req.body.name,
