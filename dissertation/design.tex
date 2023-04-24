@@ -5,7 +5,7 @@ This section is based on the final product of the project. Any compatibility or 
 \section{CI/CD Design and Implementation}
 GitHub Actions is used as the CI/CD tool in this project. Workflow files (.yml or .yaml) that automate tests, deployment, etc. are assigned using GitHub Actions. It is possible to run the workflow automatically after certain GitHub events like commit push. A green tick or a red cross will be shown beside the commit in the repository to indicate if the workflow has been completed successfully.
 
-Workflow files can be designed manually or by using recommended workflows on GitHub such as Jekyll or readily made template like JupyterLite. In this project, the pipeline is designed manually.Redirect to the GitHub repository page \href{https://github.com/gabhang/final-year-project}{here}.
+Workflow files can be designed manually or by using recommended workflows on GitHub such as Jekyll or readily made template like JupyterLite. In this project, the pipeline is designed manually. The workflow is set up at the start of the project alongside with the coding environment. The testing and the deployment part of the workflow is designed after the website is fully working. Redirect to the GitHub repository page \href{https://github.com/gabhang/final-year-project}{here} to access the workflow file.
 
 Figure~\ref{image:full-workflow} shows the yml file of the workflow. The workflow is triggered whenever a commit is pushed to the main branch. The workflow has one job named "build" that will run on an Ubuntu operating system that has five steps. 
 
@@ -26,7 +26,17 @@ Figure~\ref{image:full-workflow} shows the yml file of the workflow. The workflo
 
 Overall, this workflow ensures that the website's features work perfectly by building, testing, and deploying the system automatically in response to changes in the main branch.
 
-The \texttt{npm test} in the workflow file runs the tests automatically from the directory. The test file was design using Supertest and Jest to test out CRUD API. The code snippet from Figure~\ref{image:test-create} below tests the functionality of a create functionality, specifically, the \texttt{createGrade} function that creates a new student record. It sends a HTTP POST request to the \textit{/createGrade} endpoint with test data and expects a response status code of 200 and a response message of 'Student Grade Added'. It stores the ID of the newly created student record in a variable called \texttt{testId} to test out other functionalities. This test case ensures that the createGrade function is able to create new student records without errors.
+The \texttt{npm test} in the workflow file runs the tests automatically from the directory. The test file was design using Supertest and Jest to test out CRUD API with a test suite with five test cases:
+
+\begin{enumerate}
+  \item Able to CREATE a new student information to database
+  \item Able to READ all student information from database
+  \item Able to READ a specific student information from the database for update
+  \item Able to UPDATE a student information
+  \item Able to DELETE a student information
+\end{enumerate}
+
+The code snippet from Figure~\ref{image:test-create} below tests the functionality of a create functionality, specifically, the \texttt{createGrade} function that creates a new student record. It sends a HTTP POST request to the \textit{/createGrade} endpoint with test data and expects a response status code of 200 and a response message of 'Student Grade Added'. It stores the ID of the newly created student record in a variable called \texttt{testId} to test out other functionalities. This test case ensures that the \texttt{createGrade} function is able to create new student records without errors.
 
 \begin{figure}[h!]
     \centering
@@ -35,7 +45,7 @@ The \texttt{npm test} in the workflow file runs the tests automatically from the
     \label{image:test-create}
 \end{figure}
 
-After ensuring the application is working as expected by running the test suite, the workflow uses Heroku to deploy the application. It is vital to note that \textit{Procfile} is included in the directory as it specifies the commands that are executed by the application on startup, and the server will be started up in this context. The build file from the client side is duplicated to the server side as the server will be run first and after building the server, the Heroku post-build is used to run the build file to show the frontend. Figure~\ref{image:heroku-build} below shows that \texttt{heroku-postbuild} is added under the script in package-json.
+After ensuring the application is working as expected by running the test suite, the workflow uses Heroku, a Platform as a Service (PaaS), to deploy the application. It is vital to note that \textit{Procfile} is included in the directory as it specifies the commands that are executed by the application on startup, and the server will be started up in this context. After running the server side, the Heroku post-build is used to run the build file to show the frontend. Figure~\ref{image:heroku-build} below shows that \texttt{heroku-postbuild} is added under the script in package-json.
 
 \begin{figure}[h!]
     \centering
@@ -71,6 +81,8 @@ For this project, there is a collection in the database called \textit{grades} w
         \caption{MongoDB Structure}
         \label{tab:mongodbstruc}
 \end{table}
+
+The \textit{\textunderscore id} that is generated automatically by MongoDB is used to get specific document from the database while the rest is just the data for the application which is required as stated.
 
 \section{MERN Stack}
 As discussed previously in methodology with reference to Figure~\ref{appendix:mern} in Appendix~\ref{appendix:mern}, The database used for the system is MongoDB, the frontend or the webpage is developed using React.js and the backend or the server is built using Node.js with Express.js framework. The CRUD functionalities that are implemented in the student grade system for this project are as follows:
